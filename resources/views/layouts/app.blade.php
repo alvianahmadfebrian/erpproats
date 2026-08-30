@@ -227,6 +227,11 @@
                 <span class="material-symbols-outlined text-[20px] transition-colors shrink-0 {{ Route::is('hr') ? 'text-white' : 'text-slate-500 group-hover:text-indigo-600' }}">groups</span>
                 <span class="text-sm nav-item-text transition-all duration-300">HR Management</span>
             </a>
+            <!-- Google Drive -->
+            <a class="flex items-center gap-3 px-3 py-2.5 rounded-xl transition-all duration-200 group {{ Route::is('drive') ? 'bg-indigo-600 text-white font-semibold shadow-md shadow-indigo-600/20' : 'text-slate-600 hover:text-indigo-600 hover:bg-slate-50' }}" href="{{ route('drive') }}">
+                <span class="material-symbols-outlined text-[20px] transition-colors shrink-0 {{ Route::is('drive') ? 'text-white' : 'text-slate-500 group-hover:text-indigo-600' }}">cloud</span>
+                <span class="text-sm nav-item-text transition-all duration-300">Google Drive</span>
+            </a>
             
             <!-- Settings -->
             <a class="flex items-center gap-3 px-3 py-2.5 rounded-xl transition-all duration-200 group text-slate-600 hover:text-indigo-600 hover:bg-slate-50 mt-auto" href="#">

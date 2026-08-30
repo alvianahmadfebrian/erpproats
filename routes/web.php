@@ -39,6 +39,7 @@ Route::middleware('auth')->group(function () {
     Route::post('/hr/leaves/{id}/reject', [\App\Http\Controllers\HRController::class, 'rejectLeave'])->name('hr.leaves.reject');
     Route::post('/hr/documents', [\App\Http\Controllers\HRController::class, 'uploadDocument'])->name('hr.documents.store');
     Route::delete('/hr/documents/{id}', [\App\Http\Controllers\HRController::class, 'deleteDocument'])->name('hr.documents.destroy');
+    Route::get('/drive', function () { return view('drive'); })->name('drive');
 });
 
 Route::get('/', function () {
