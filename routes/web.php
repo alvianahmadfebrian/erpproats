@@ -39,7 +39,13 @@ Route::middleware('auth')->group(function () {
     Route::post('/hr/leaves/{id}/reject', [\App\Http\Controllers\HRController::class, 'rejectLeave'])->name('hr.leaves.reject');
     Route::post('/hr/documents', [\App\Http\Controllers\HRController::class, 'uploadDocument'])->name('hr.documents.store');
     Route::delete('/hr/documents/{id}', [\App\Http\Controllers\HRController::class, 'deleteDocument'])->name('hr.documents.destroy');
-    Route::get('/drive', function () { return view('drive'); })->name('drive');
+    Route::get('/drive', [\App\Http\Controllers\GoogleDriveController::class, 'index'])->name('drive');
+    Route::post('/drive/credentials', [\App\Http\Controllers\GoogleDriveController::class, 'saveCredentials'])->name('drive.credentials');
+    Route::get('/drive/callback', [\App\Http\Controllers\GoogleDriveController::class, 'callback'])->name('drive.callback');
+    Route::get('/drive/disconnect', [\App\Http\Controllers\GoogleDriveController::class, 'disconnect'])->name('drive.disconnect');
+    Route::post('/drive/folder', [\App\Http\Controllers\GoogleDriveController::class, 'createFolder'])->name('drive.folder');
+    Route::post('/drive/upload', [\App\Http\Controllers\GoogleDriveController::class, 'uploadFile'])->name('drive.upload');
+    Route::delete('/drive/{id}', [\App\Http\Controllers\GoogleDriveController::class, 'destroy'])->name('drive.destroy');
 });
 
 Route::get('/', function () {
