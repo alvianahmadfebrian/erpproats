@@ -274,10 +274,134 @@
             </div>
         </div>
         <div class="flex items-center gap-stack-md">
-            <div class="flex items-center gap-unit text-on-surface-variant">
-                <button class="p-unit rounded-full hover:bg-surface-container-high transition-colors"><span class="material-symbols-outlined">notifications</span></button>
-                <button class="p-unit rounded-full hover:bg-surface-container-high transition-colors"><span class="material-symbols-outlined">history</span></button>
-                <button class="p-unit rounded-full hover:bg-surface-container-high transition-colors"><span class="material-symbols-outlined">chat</span></button>
+            <div class="flex items-center gap-2 text-on-surface-variant">
+                <!-- Notifications Button & Dropdown -->
+                <div class="relative">
+                    <button onclick="toggleDropdown(event, 'notifications-dropdown')" class="relative p-2 rounded-full hover:bg-surface-container-high transition-colors focus:outline-none" title="Notifikasi">
+                        <span class="material-symbols-outlined block">notifications</span>
+                        <span id="notif-badge" class="absolute top-1.5 right-1.5 w-2 h-2 bg-rose-500 rounded-full ring-2 ring-white"></span>
+                    </button>
+                    <!-- Dropdown -->
+                    <div id="notifications-dropdown" class="hidden absolute right-0 mt-2 w-80 bg-surface-container-lowest/95 backdrop-blur-sm border border-outline-variant rounded-2xl shadow-xl z-50 overflow-hidden animate-scale-up">
+                        <div class="p-4 border-b border-outline-variant/60 flex justify-between items-center bg-surface-container-low/40">
+                            <span class="font-body-sm font-bold text-primary">Notifikasi</span>
+                            <button onclick="clearNotifications(event)" class="text-xs text-indigo-600 hover:underline">Tandai semua dibaca</button>
+                        </div>
+                        <div class="divide-y divide-outline-variant/40 max-h-80 overflow-y-auto">
+                            <!-- Item 1 -->
+                            <a href="{{ route('inventory') }}" class="flex gap-3 p-3.5 hover:bg-surface-container-low/50 transition-colors">
+                                <div class="w-9 h-9 rounded-xl bg-amber-500/10 text-amber-600 flex items-center justify-center shrink-0">
+                                    <span class="material-symbols-outlined text-[20px]">warning</span>
+                                </div>
+                                <div class="flex-1 min-w-0 text-left">
+                                    <p class="font-body-sm text-[13px] font-semibold text-primary leading-tight">Stok Menipis: Gibson Les Paul</p>
+                                    <p class="font-body-sm text-[11px] text-on-surface-variant mt-0.5">Tersisa 4 unit di gudang utama</p>
+                                    <span class="text-[10px] text-on-surface-variant/70 mt-1 block">5 menit yang lalu</span>
+                                </div>
+                            </a>
+                            <!-- Item 2 -->
+                            <a href="{{ route('hr') }}" class="flex gap-3 p-3.5 hover:bg-surface-container-low/50 transition-colors">
+                                <div class="w-9 h-9 rounded-xl bg-indigo-500/10 text-indigo-600 flex items-center justify-center shrink-0">
+                                    <span class="material-symbols-outlined text-[20px]">event_note</span>
+                                </div>
+                                <div class="flex-1 min-w-0 text-left">
+                                    <p class="font-body-sm text-[13px] font-semibold text-primary leading-tight">Pengajuan Cuti Baru</p>
+                                    <p class="font-body-sm text-[11px] text-on-surface-variant mt-0.5">Sarah Johnson mengajukan cuti tahunan</p>
+                                    <span class="text-[10px] text-on-surface-variant/70 mt-1 block">1 jam yang lalu</span>
+                                </div>
+                            </a>
+                            <!-- Item 3 -->
+                            <a href="{{ route('finance') }}" class="flex gap-3 p-3.5 hover:bg-surface-container-low/50 transition-colors">
+                                <div class="w-9 h-9 rounded-xl bg-emerald-500/10 text-emerald-600 flex items-center justify-center shrink-0">
+                                    <span class="material-symbols-outlined text-[20px]">account_balance_wallet</span>
+                                </div>
+                                <div class="flex-1 min-w-0 text-left">
+                                    <p class="font-body-sm text-[13px] font-semibold text-primary leading-tight">Payroll Selesai Diproses</p>
+                                    <p class="font-body-sm text-[11px] text-on-surface-variant mt-0.5">Gaji karyawan bulan April sukses ditransfer</p>
+                                    <span class="text-[10px] text-on-surface-variant/70 mt-1 block">3 jam yang lalu</span>
+                                </div>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- History Button & Dropdown -->
+                <div class="relative">
+                    <button onclick="toggleDropdown(event, 'history-dropdown')" class="p-2 rounded-full hover:bg-surface-container-high transition-colors focus:outline-none" title="Aktivitas Terbaru">
+                        <span class="material-symbols-outlined block">history</span>
+                    </button>
+                    <!-- Dropdown -->
+                    <div id="history-dropdown" class="hidden absolute right-0 mt-2 w-80 bg-surface-container-lowest/95 backdrop-blur-sm border border-outline-variant rounded-2xl shadow-xl z-50 overflow-hidden animate-scale-up">
+                        <div class="p-4 border-b border-outline-variant/60 flex justify-between items-center bg-surface-container-low/40">
+                            <span class="font-body-sm font-bold text-primary">Aktivitas Terbaru</span>
+                        </div>
+                        <div class="divide-y divide-outline-variant/40 max-h-80 overflow-y-auto">
+                            <!-- Item 1 -->
+                            <div class="flex gap-3 p-3.5 hover:bg-surface-container-low/50 transition-colors text-left">
+                                <div class="w-8 h-8 rounded-full bg-slate-100 flex items-center justify-center text-slate-600 shrink-0">
+                                    <span class="material-symbols-outlined text-[18px]">edit</span>
+                                </div>
+                                <div class="flex-1 min-w-0">
+                                    <p class="font-body-sm text-[12px] text-primary"><span class="font-semibold">Anda</span> mengubah detail vendor <span class="font-semibold">Yamaha Music</span></p>
+                                    <span class="text-[10px] text-on-surface-variant/70 mt-0.5 block">10 menit yang lalu</span>
+                                </div>
+                            </div>
+                            <!-- Item 2 -->
+                            <div class="flex gap-3 p-3.5 hover:bg-surface-container-low/50 transition-colors text-left">
+                                <div class="w-8 h-8 rounded-full bg-slate-100 flex items-center justify-center text-slate-600 shrink-0">
+                                    <span class="material-symbols-outlined text-[18px]">add_circle</span>
+                                </div>
+                                <div class="flex-1 min-w-0">
+                                    <p class="font-body-sm text-[12px] text-primary"><span class="font-semibold">Anda</span> menambahkan item inventaris <span class="font-semibold">Fender Stratocaster</span></p>
+                                    <span class="text-[10px] text-on-surface-variant/70 mt-0.5 block">1 jam yang lalu</span>
+                                </div>
+                            </div>
+                            <!-- Item 3 -->
+                            <div class="flex gap-3 p-3.5 hover:bg-surface-container-low/50 transition-colors text-left">
+                                <div class="w-8 h-8 rounded-full bg-slate-100 flex items-center justify-center text-slate-600 shrink-0">
+                                    <span class="material-symbols-outlined text-[18px]">payments</span>
+                                </div>
+                                <div class="flex-1 min-w-0">
+                                    <p class="font-body-sm text-[12px] text-primary"><span class="font-semibold">Anda</span> mencatat pemasukan baru <span class="font-semibold text-emerald-600">Rp 4.500.000</span></p>
+                                    <span class="text-[10px] text-on-surface-variant/70 mt-0.5 block">3 jam yang lalu</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Chat/Feedback Button & Dropdown -->
+                <div class="relative">
+                    <button onclick="toggleDropdown(event, 'chat-dropdown')" class="p-2 rounded-full hover:bg-surface-container-high transition-colors focus:outline-none" title="Live Support & Feedback">
+                        <span class="material-symbols-outlined block">chat</span>
+                    </button>
+                    <!-- Dropdown -->
+                    <div id="chat-dropdown" class="hidden absolute right-0 mt-2 w-80 bg-surface-container-lowest/95 backdrop-blur-sm border border-outline-variant rounded-2xl shadow-xl z-50 overflow-hidden animate-scale-up">
+                        <div class="p-4 border-b border-outline-variant/60 flex justify-between items-center bg-surface-container-low/40">
+                            <div class="flex items-center gap-2">
+                                <div class="w-2 h-2 bg-green-500 rounded-full animate-pulse"></div>
+                                <span class="font-body-sm font-bold text-primary">Live Support & Feedback</span>
+                            </div>
+                        </div>
+                        <!-- Chat message thread -->
+                        <div class="p-4 space-y-4 max-h-64 overflow-y-auto" id="chat-messages">
+                            <div class="flex items-start gap-2.5">
+                                <div class="w-7 h-7 rounded-full bg-indigo-100 flex items-center justify-center text-indigo-600 shrink-0 text-[10px] font-bold">CS</div>
+                                <div class="bg-surface-container-low p-3 rounded-2xl rounded-tl-none font-body-sm text-[12px] text-on-surface leading-normal text-left max-w-[80%]">
+                                    Halo! Ada yang bisa kami bantu? Anda juga bisa memberikan masukan/feedback di sini.
+                                </div>
+                            </div>
+                        </div>
+                        <!-- Chat input -->
+                        <form id="chat-form" onsubmit="sendChatMessage(event)" class="p-3 border-t border-outline-variant/60 bg-surface-container-low/20 flex gap-2">
+                            <label class="sr-only" for="chat-message-input">Pesan</label>
+                            <input id="chat-message-input" type="text" placeholder="Ketik pesan..." required class="flex-1 bg-surface-container-lowest border border-outline-variant rounded-full px-3.5 py-1.5 font-body-sm text-xs focus:outline-none focus:ring-2 focus:ring-indigo-500/50"/>
+                            <button type="submit" class="w-8 h-8 rounded-full bg-indigo-600 text-white flex items-center justify-center hover:bg-indigo-700 transition-colors shrink-0">
+                                <span class="material-symbols-outlined text-[16px] block">send</span>
+                            </button>
+                        </form>
+                    </div>
+                </div>
             </div>
             
             <div class="h-8 w-px bg-outline-variant"></div>
@@ -297,5 +421,90 @@
 </main>
 
 @stack('scripts')
+
+<script>
+    function toggleDropdown(event, dropdownId) {
+        event.preventDefault();
+        event.stopPropagation();
+        const dropdowns = ['notifications-dropdown', 'history-dropdown', 'chat-dropdown'];
+        dropdowns.forEach(id => {
+            const el = document.getElementById(id);
+            if (!el) return;
+            if (id === dropdownId) {
+                el.classList.toggle('hidden');
+            } else {
+                el.classList.add('hidden');
+            }
+        });
+    }
+
+    function clearNotifications(event) {
+        event.preventDefault();
+        event.stopPropagation();
+        const badge = document.getElementById('notif-badge');
+        if (badge) {
+            badge.classList.add('hidden');
+        }
+        alert('Semua notifikasi telah ditandai sebagai dibaca!');
+    }
+
+    function sendChatMessage(event) {
+        event.preventDefault();
+        const input = document.getElementById('chat-message-input');
+        const text = input.value.trim();
+        if (!text) return;
+
+        input.value = '';
+
+        const container = document.getElementById('chat-messages');
+        
+        // Append user message
+        const userMsg = document.createElement('div');
+        userMsg.className = 'flex justify-end';
+        userMsg.innerHTML = `
+            <div class="bg-indigo-600 text-white p-3 rounded-2xl rounded-tr-none font-body-sm text-[12px] leading-normal text-left max-w-[80%] shadow-sm">
+                ${escapeHtml(text)}
+            </div>
+        `;
+        container.appendChild(userMsg);
+        container.scrollTop = container.scrollHeight;
+
+        // Auto reply
+        setTimeout(() => {
+            const botMsg = document.createElement('div');
+            botMsg.className = 'flex items-start gap-2.5 animate-fade-in';
+            botMsg.innerHTML = `
+                <div class="w-7 h-7 rounded-full bg-indigo-100 flex items-center justify-center text-indigo-600 shrink-0 text-[10px] font-bold">CS</div>
+                <div class="bg-surface-container-low p-3 rounded-2xl rounded-tl-none font-body-sm text-[12px] text-on-surface leading-normal text-left max-w-[80%] shadow-sm">
+                    Terima kasih atas pesan Anda! Masukan Anda telah kami catat untuk pengembangan sistem ERP ini.
+                </div>
+            `;
+            container.appendChild(botMsg);
+            container.scrollTop = container.scrollHeight;
+        }, 1000);
+    }
+
+    function escapeHtml(str) {
+        return str.replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;").replace(/"/g, "&quot;").replace(/'/g, "&#039;");
+    }
+
+    // Close on click outside
+    window.addEventListener('click', () => {
+        const dropdowns = ['notifications-dropdown', 'history-dropdown', 'chat-dropdown'];
+        dropdowns.forEach(id => {
+            const el = document.getElementById(id);
+            if (el) {
+                el.classList.add('hidden');
+            }
+        });
+    });
+
+    // Stop propagation inside dropdowns
+    document.querySelectorAll('#notifications-dropdown, #history-dropdown, #chat-dropdown').forEach(el => {
+        el.addEventListener('click', (e) => {
+            e.stopPropagation();
+        });
+    });
+</script>
 </body>
 </html>
